@@ -7,11 +7,14 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve": "npx serve .",
     "dev": "npx live-server .",
-    "deploy": "echo 'Deploy to your preferred platform'"
+    "deploy": "echo 'Deploy to your preferred platform'",
+    "netlify-build": "bash netlify.sh",
+    "postinstall": "ngcc"
   },
   "keywords": [
     "portfolio",

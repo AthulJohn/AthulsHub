@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
     adminPasswordHash: '5571a16e87754af80f04546def990ba055487a39edc00fd793165030f950df33',
-    supabaseUrl: 'https://sylzgpftbedxxznfyaeq.supabase.co',
-    supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5bHpncGZ0YmVkeHh6bmZ5YWVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExMDcwNDIsImV4cCI6MjA2NjY4MzA0Mn0.yQ5p87caM44l5y6lgG4Dlnae3nRDTArgN61F91eM_Jg'  
+    SUPABASE_URL: '',
+    SUPABASE_ANON_KEY: ''  
 };
