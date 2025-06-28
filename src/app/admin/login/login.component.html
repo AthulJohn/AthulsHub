@@ -1,0 +1,22 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-sm">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Admin Login</h2>
+  
+      <div class="mb-4">
+        <label class="block text-gray-600 text-sm font-medium mb-1">Username</label>
+        <input type="text" [(ngModel)]="username" placeholder="admin" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+      </div>
+  
+      <div class="mb-6">
+        <label class="block text-gray-600 text-sm font-medium mb-1">Password</label>
+        <input type="password" [(ngModel)]="password" placeholder="admin123" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+      </div>
+  
+      <button (click)="login()" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+        Log In
+      </button>
+  
+      <p *ngIf="loginFailed" class="text-red-500 text-sm mt-3 text-center">Invalid username or password</p>
+    </div>
+  </div>
+  

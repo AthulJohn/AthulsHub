@@ -1,0 +1,91 @@
+<!-- Projects Hero Section -->
+<section class="py-12 bg-dark-900" *ngIf="showHeader">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    {{ title }}
+                </span>
+            </h1>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                {{ subtitle }}
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Grid Section -->
+<section class="pb-20 pt-8 bg-dark-900">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Filter Section -->
+        <div class="container mx-auto px-4 pb-8" *ngIf="showAll">
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex rounded-lg border border-gray-200 dark:border-gray-700">
+                    <button *ngFor="let category of categories" [class.bg-primary-500]="selectedCategory === category"
+                        [class.text-white]="selectedCategory === category"
+                        class="px-4 py-2 text-sm font-medium first:rounded-l-lg last:rounded-r-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:z-10 focus:ring-2 focus:ring-primary-500"
+                        (click)="filterByCategory(category)">
+                        {{ category }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div *ngFor="let project of filteredProjects; let i = index" #cardContainer
+                class="relative transform-gpu transition-all duration-300 ease-out z-[1]"
+                (mousemove)="onCardMouseMove($event, i)" (mouseleave)="onCardMouseLeave(i)">
+                <div #projectCard class="project-card relative bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 ease-out">
+                    <div class="relative h-40 overflow-hidden">
+                        <img [src]="project.imageUrl" [alt]="project.name"
+                            class="w-full h-full object-cover">
+                        <div *ngIf="project.featured"
+                            class="absolute top-2 right-2 bg-primary-500 text-white px-2 py-1 rounded text-sm">
+                            Featured
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{{ project.name }}</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">{{ project.description }}</p>
+                        <div class="flex flex-wrap gap-1 mb-3">
+                            <span *ngFor="let tech of project.techStack"
+                                class="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded text-xs">
+                                {{ tech }}
+                            </span>
+                        </div>
+                        <a [href]="project.projectUrl" target="_blank"
+                            class="relative inline-block text-white text-sm font-medium group">
+                            <span class="relative z-10">View Project</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-400 to-purple-500 
+                            group-hover:w-full transition-all duration-300 ease-in-out"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View All Projects button when not showing all -->
+        <div *ngIf="!showAll" class="text-center mt-12">
+            <a routerLink="/projects" 
+               class="relative inline-block text-white text-xl font-semibold group">
+                <span class="relative z-10 group-hover:-translate-y-1 transition-transform duration-300 ease-in-out inline-block">
+                    View All Projects
+                    <svg class="inline-block ml-2 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300 ease-in-out" 
+                         fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </span>
+                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-400 to-purple-500 
+                group-hover:w-full transition-all duration-300 ease-in-out"></span>
+            </a>
+        </div>
+
+        <!-- No projects message-->
+        <div *ngIf="filteredProjects.length === 0" class="text-center py-12">
+            <p class="text-gray-400 text-lg">No projects found in this category.</p>
+        </div>
+    </div>
+</section>

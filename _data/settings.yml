@@ -1,0 +1,8 @@
+title: "ATJ Hub - Portfolio"
+description: "A showcase of innovative projects and creative solutions in web development and technology."
+contact_email: "hello@atjhub.com"
+formspree_id: "YOUR_FORMSPREE_ID"
+theme:
+  primary: "#3b82f6"
+  secondary: "#8b5cf6"
+  background: "#0f172a" 

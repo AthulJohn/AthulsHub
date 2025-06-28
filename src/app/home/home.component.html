@@ -1,0 +1,79 @@
+<!-- Hero Section -->
+<section id="home" class="gradient-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+    <div class="absolute inset-0">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+    </div>
+    
+    <div class="relative z-10 text-center max-w-4xl mx-auto px-4">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+            <span class="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Welcome to My Portfolio
+            </span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Exploring the intersection of creativity and technology through innovative projects
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a routerLink="/projects" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 animate-glow">
+                View Projects
+            </a>
+            <a routerLink="/contact" class="border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+                Get in Touch
+            </a>
+        </div>
+    </div>
+    
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-indicator">
+        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- Featured Projects Section -->
+<app-projects
+    [showAll]="false"
+    [maxProjects]="4"
+    [showHeader]="true"
+    title="Featured Projects"
+    subtitle="Check out some of my highlighted projects that demonstrate my skills and expertise."
+></app-projects>
+
+<!-- <section id="projects" class="py-20 bg-dark-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    Featured Projects
+                </span>
+            </h2>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                A collection of innovative projects showcasing creativity and technical expertise
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+            <div *ngFor="let project of projects" class="project-card bg-dark-800 rounded-xl overflow-hidden border border-dark-700 hover:border-blue-500/50">
+                <div class="relative overflow-hidden">
+                    <img [src]="project.image" [alt]="project.title" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-white">{{ project.title }}</h3>
+                    <p class="text-gray-400 mb-4">{{ project.description }}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span *ngFor="let tag of project.tags" class="px-2 py-1 bg-dark-700 text-blue-400 text-xs rounded-full">{{ tag }}</span>
+                    </div>
+                    <a [href]="project.url" target="_blank" rel="noopener noreferrer" 
+                       class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-colors">
+                        View Project
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  -->

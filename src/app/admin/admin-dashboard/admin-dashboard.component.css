@@ -1,0 +1,11 @@
+.input {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    color: #000;
+  }
+  
+  .btn {
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,25 @@
+.project-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #1e293b; /* Tailwind dark-800 */
+    border: 1px solid #334155; /* Tailwind dark-700 */
+  }
+  
+  .box-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease-out;
+    z-index: 10;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .custom-cursor {
+    cursor: url(http://www.rw-designer.com/cursor-extern.php?id=135684), pointer;
+  }
+  

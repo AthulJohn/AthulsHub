@@ -1,0 +1,8 @@
+You are building a personal portfolio website to showcase projects. 
+Create a new web project using a modern static framework (e.g. Angular.js) with Tailwind CSS for styling. 
+The site should use a dark color scheme and a responsive CSS grid on the homepage to display project cards. 
+Each card must link to the corresponding project URL (these projects will be on subdomains of the hub). 
+Add smooth hover animations to the cards for interactivity. Include a “Contact” page with a form that integrates with a service like Formspree or Netlify Forms. 
+Implement one standout interactive feature (e.g. a soothing animation or unique scrolling) to make the design unique. 
+Set up an admin interface using Netlify CMS (add an `/admin` folder with `index.html` and config) so the project list can be edited via a web UI. 
+Ensure the design remains minimalist and dark-themed throughout. Finally, configure the project for free static hosting (Netlify/Vercel/Static.run) and mention how to use Git for deployment. 

@@ -1,0 +1,11 @@
+name: "ATJ Hub"
+title: "Full Stack Developer & Creative Technologist"
+bio: "Passionate about creating innovative digital experiences that bridge the gap between creativity and technology. Specializing in modern web development, user experience design, and emerging technologies."
+email: "hello@atjhub.com"
+location: "Remote / Worldwide"
+avatar: "/images/avatar.jpg"
+social:
+  github: "https://github.com/atjhub"
+  linkedin: "https://linkedin.com/in/atjhub"
+  twitter: "https://twitter.com/atjhub"
+  portfolio: "https://atjhub.com" 

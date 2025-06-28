@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATJ Hub - Admin</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+        
+        .admin-header {
+            background: #1e293b;
+            padding: 1rem;
+            border-bottom: 1px solid #334155;
+            text-align: center;
+        }
+        
+        .admin-header h1 {
+            margin: 0;
+            color: #3b82f6;
+            font-size: 1.5rem;
+        }
+        
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .admin-info {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-info h2 {
+            color: #3b82f6;
+            margin-top: 0;
+        }
+        
+        .admin-info p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        .admin-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .admin-link {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: #f1f5f9;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-link:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+        }
+        
+        .admin-link h3 {
+            color: #3b82f6;
+            margin-top: 0;
+        }
+        
+        .admin-link p {
+            color: #cbd5e1;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <h1>ATJ Hub - Content Management</h1>
+    </div>
+    
+    <div class="admin-container">
+        <div class="admin-info">
+            <h2>Welcome to the Admin Panel</h2>
+            <p>
+                This is the Netlify CMS admin interface for managing your portfolio content. 
+                You can edit projects, update your profile, and manage all content from this dashboard.
+            </p>
+        </div>
+        
+        <div class="admin-links">
+            <a href="#projects" class="admin-link" onclick="openCMS('projects')">
+                <h3>Manage Projects</h3>
+                <p>Add, edit, or remove portfolio projects. Update project details, images, and links.</p>
+            </a>
+            
+            <a href="#profile" class="admin-link" onclick="openCMS('profile')">
+                <h3>Edit Profile</h3>
+                <p>Update your personal information, bio, and contact details.</p>
+            </a>
+            
+            <a href="#settings" class="admin-link" onclick="openCMS('settings')">
+                <h3>Site Settings</h3>
+                <p>Configure site-wide settings, themes, and preferences.</p>
+            </a>
+        </div>
+    </div>
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Project Management</h1>
+          <button (click)="onAddNew()"
+                  class="bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-600 transition-colors">
+            Add New Project
+          </button>
+        </div>
+      
+        <!-- Project Form -->
+        <div *ngIf="showForm" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+            {{ editingProject ? 'Edit Project' : 'Add New Project' }}
+          </h2>
+          <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+              <input type="text"
+                     formControlName="name"
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
+            </div>
+      
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+              <textarea formControlName="description"
+                        rows="3"
+                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
+            </div>
+      
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tech Stack (comma-separated)</label>
+              <input type="text"
+                     formControlName="techStack"
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
+            </div>
+      
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Image URL</label>
+              <input type="text"
+                     formControlName="imageUrl"
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
+            </div>
+      
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Project URL</label>
+              <input type="text"
+                     formControlName="projectUrl"
+                     class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
+            </div>
+      
+            <div class="flex items-center">
+              <input type="checkbox"
+                     formControlName="featured"
+                     class="h-4 w-4 text-primary-500 focus:ring-primary-500 border-gray-300 rounded">
+              <label class="ml-2 text-sm text-gray-700 dark:text-gray-300">Featured Project</label>
+            </div>
+      
+            <div class="flex justify-end space-x-4">
+              <button type="button"
+                      (click)="onCancel()"
+                      class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                Cancel
+              </button>
+              <button type="submit"
+                      [disabled]="!projectForm.valid"
+                      class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 disabled:opacity-50">
+                {{ editingProject ? 'Update' : 'Create' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      
+        <!-- Projects List -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-700">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Description</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Featured</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              <tr *ngFor="let project of projects">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">{{ project.name }}</td>
+                <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-300">{{ project.description }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                  <span *ngIf="project.featured" class="text-green-500">Yes</span>
+                  <span *ngIf="!project.featured" class="text-red-500">No</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button (click)="onEdit(project)"
+                          class="text-primary-500 hover:text-primary-600 mr-4">Edit</button>
+                  <button (click)="onDelete(project)"
+                          class="text-red-500 hover:text-red-600">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> 
+    <script>
+        // Initialize Netlify Identity
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
+
+        function openCMS(collection) {
+            // This would typically open the Netlify CMS editor
+            // For now, we'll show a message
+            alert(`Opening ${collection} editor...\n\nIn a real implementation, this would open the Netlify CMS interface for editing ${collection}.`);
+        }
+
+        // Check if user is authenticated
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    // Redirect to login if not authenticated
+                    window.netlifyIdentity.open();
+                }
+            });
+        }
+    </script>
+</body>
+</html> 
