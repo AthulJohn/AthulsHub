@@ -13,8 +13,7 @@
     "serve": "npx serve .",
     "dev": "npx live-server .",
     "deploy": "echo 'Deploy to your preferred platform'",
-    "netlify-build": "bash netlify.sh",
-    "postinstall": "ngcc"
+    "netlify-build": "bash netlify.sh"
   },
   "keywords": [
     "portfolio",
