@@ -1,6 +1,6 @@
 [build]
   command = "npm run netlify-build"
-  publish = "dist/atjhub_portfolio"
+  publish = "dist/atjhubPortfolio"
 
 [build.environment]
   NODE_VERSION = "18"

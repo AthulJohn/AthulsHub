@@ -1,5 +1,5 @@
 {
-  "name": "atjhub_portfolio",
+  "name": "atjhubPortfolio",
   "version": "1.0.0",
   "description": "A modern, responsive portfolio website with dark theme and interactive elements",
   "main": "index.html",
@@ -27,6 +27,7 @@
   "author": "ATJ Hub",
   "license": "MIT",
   "dependencies": {
+    "@angular-devkit/build-angular": "^17.0.0",
     "@angular/animations": "^17.0.0",
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.0",
@@ -42,7 +43,6 @@
     "zone.js": "^0.13.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.0",
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~4.3.0",
@@ -58,10 +58,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AthulJohn/atjhub_portfolio.git"
+    "url": "https://github.com/AthulJohn/atjhubPortfolio.git"
   },
   "bugs": {
-    "url": "https://github.com/AthulJohn/atjhub_portfolio/issues"
+    "url": "https://github.com/AthulJohn/atjhubPortfolio/issues"
   },
   "homepage": "https://atjhub.com"
 }
