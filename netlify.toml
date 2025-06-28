@@ -5,6 +5,9 @@
 [build.environment]
   NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
+  SUPABASE_URL = "from_netlify_env"
+  SUPABASE_ANON_KEY = "from_netlify_env"
+  ADMIN_PASSWORD_HASH = "from_netlify_env"
 
 [[redirects]]
   from = "/*"

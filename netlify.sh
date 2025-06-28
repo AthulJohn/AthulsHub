@@ -2,11 +2,11 @@
 
 # Install dependencies
 echo "Installing dependencies..."
-npm install
+npm install --legacy-peer-deps
 
-# Install Angular CLI globally
-echo "Installing Angular CLI..."
-npm install -g @angular/cli
+# Install Angular CLI and build dependencies globally
+echo "Installing Angular CLI and build dependencies..."
+npm install -g @angular/cli @angular-devkit/build-angular
 
 # Build the project
 echo "Building the project..."
