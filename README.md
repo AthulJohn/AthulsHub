@@ -34,8 +34,8 @@ A modern, responsive portfolio website built with **Angular** and **Tailwind CSS
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/atjhub_portfolio.git
-   cd atjhub_portfolio
+   git clone https://github.com/yourusername/atjhub.git
+   cd atjhub
    ```
 
 2. **Install dependencies**
@@ -61,7 +61,7 @@ A modern, responsive portfolio website built with **Angular** and **Tailwind CSS
 ## 📁 Project Structure
 
 ```
-ATJHub-0.1-Cursor/
+atjhub/
 ├── src/
 │   ├── app/
 │   │   ├── home/
@@ -153,7 +153,7 @@ This creates a `dist/` folder with the production-ready application.
 2. **Deploy to Netlify**
    - Connect your repository to Netlify
    - Set build command: `npm run build`
-   - Set publish directory: `dist/atjhub_portfolio`
+   - Set publish directory: `dist/atjhub`
 
 3. **Configure Netlify CMS**
    - Enable Netlify Identity in your site settings

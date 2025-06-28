@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "atjhubPortfolio": {
+    "atjhub": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/atjhubPortfolio",
+            "outputPath": "dist/atjhub",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "atjhubPortfolio:build:production"
+              "browserTarget": "atjhub:build:production"
             },
             "development": {
-              "browserTarget": "atjhubPortfolio:build:development"
+              "browserTarget": "atjhub:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "atjhubPortfolio:build"
+            "browserTarget": "atjhub:build"
           }
         },
         "test": {

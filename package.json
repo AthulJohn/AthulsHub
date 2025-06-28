@@ -1,5 +1,5 @@
 {
-  "name": "atjhubPortfolio",
+  "name": "atjhub",
   "version": "1.0.0",
   "description": "A modern, responsive portfolio website with dark theme and interactive elements",
   "main": "index.html",
@@ -65,10 +65,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AthulJohn/atjhub_portfolio.git"
+    "url": "https://github.com/AthulJohn/atjhub.git"
   },
   "bugs": {
-    "url": "https://github.com/AthulJohn/atjhub_portfolio/issues"
+    "url": "https://github.com/AthulJohn/atjhub/issues"
   },
   "homepage": "https://atjhub.com"
 }
