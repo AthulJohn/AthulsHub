@@ -27,7 +27,6 @@
   "author": "ATJ Hub",
   "license": "MIT",
   "dependencies": {
-    "@angular-devkit/build-angular": "^17.0.0",
     "@angular/animations": "^17.0.0",
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.0",
@@ -42,13 +41,15 @@
     "crypto-js": "^4.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "typescript": "~5.2.0",
     "zone.js": "^0.13.3"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^17.0.0",
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~4.3.0",
+    "@types/node": "^20.11.0",
+    "css-loader": "^6.9.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -56,14 +57,18 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "live-server": "^1.2.2",
-    "serve": "^14.2.2"
+    "postcss": "^8.4.33",
+    "postcss-loader": "^7.3.4",
+    "serve": "^14.2.2",
+    "style-loader": "^3.3.3",
+    "typescript": "~5.2.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AthulJohn/atjhubPortfolio.git"
+    "url": "https://github.com/AthulJohn/atjhub_portfolio.git"
   },
   "bugs": {
-    "url": "https://github.com/AthulJohn/atjhubPortfolio/issues"
+    "url": "https://github.com/AthulJohn/atjhub_portfolio/issues"
   },
   "homepage": "https://atjhub.com"
 }

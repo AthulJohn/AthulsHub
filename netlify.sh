@@ -6,17 +6,17 @@ npm cache clean --force
 rm -rf node_modules
 rm -rf dist
 
-# Install dependencies
+# Install dependencies with specific flags for Netlify environment
 echo "Installing dependencies..."
-npm install --legacy-peer-deps
+npm install --legacy-peer-deps --prefer-offline=false --no-audit
 
 # Install Angular CLI globally
 echo "Installing Angular CLI..."
 npm install -g @angular/cli
 
-# Install specific CSS processing dependencies
-echo "Installing CSS processing dependencies..."
-npm install --save-dev css-loader style-loader postcss-loader
+# Ensure compiler is available
+echo "Installing compiler dependencies..."
+npm install --save-dev @angular/compiler-cli @angular-devkit/build-angular typescript@~5.2.0
 
 # Build the project with production configuration
 echo "Building the project..."
