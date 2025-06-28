@@ -5,7 +5,11 @@
   "projects": {
     "atjhubPortfolio": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "css"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -25,7 +29,12 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "preserveSymlinks": true,
+            "allowedCommonJsDependencies": [
+              "css-select",
+              "critters"
+            ]
           },
           "configurations": {
             "production": {

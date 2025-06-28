@@ -1,16 +1,26 @@
 #!/bin/bash
 
+# Clear npm cache and remove node_modules
+echo "Cleaning up..."
+npm cache clean --force
+rm -rf node_modules
+rm -rf dist
+
 # Install dependencies
 echo "Installing dependencies..."
 npm install --legacy-peer-deps
 
-# Install Angular CLI and build dependencies globally
-echo "Installing Angular CLI and build dependencies..."
-npm install -g @angular/cli @angular-devkit/build-angular
+# Install Angular CLI globally
+echo "Installing Angular CLI..."
+npm install -g @angular/cli
 
-# Build the project
+# Install specific CSS processing dependencies
+echo "Installing CSS processing dependencies..."
+npm install --save-dev css-loader style-loader postcss-loader
+
+# Build the project with production configuration
 echo "Building the project..."
-ng build
+ng build --configuration production --verbose
 
 # Check if build was successful
 if [ $? -eq 0 ]; then
