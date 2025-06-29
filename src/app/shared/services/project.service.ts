@@ -1,8 +1,20 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, from } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Project } from '../models/project.model';
-import { supabase } from '../supabase';
+import { SupabaseService } from './supabase.service';
+
+interface RawProjectData {
+  id: string;
+  name: string;
+  description: string;
+  image_url: string;
+  project_url: string;
+  git_url: string;
+  featured: boolean;
+  status: number;
+  tech_stack: string[];
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +22,21 @@ import { supabase } from '../supabase';
 export class ProjectService {
   private projectsSubject = new BehaviorSubject<Project[]>([]);
 
-  constructor() {
+  constructor(private supabaseService: SupabaseService) {
     this.loadProjects();
   }
 
   private async loadProjects(): Promise<void> {
     try {
-      const { data, error } = await supabase
-        .from('hub_projects')
-        .select('*')
-        .order('created_at', { ascending: false });
+      console.log('Starting to load projects...');
+      const { data, error } = await this.supabaseService.fetchProjects();
+      
+      if (error) {
+        console.error('Error loading projects:', error);
+        this.projectsSubject.next([]);
+        return;
+      }
 
-      if (error) throw error;
       this.projectsSubject.next(data || []);
     } catch (error) {
       console.error('Error loading projects:', error);
@@ -41,13 +56,10 @@ export class ProjectService {
 
   async addProject(project: Omit<Project, 'id'>): Promise<void> {
     try {
-      const { data, error } = await supabase
-        .from('hub_projects')
-        .insert([project])
-        .select()
-        .single();
+      const { data, error } = await this.supabaseService.addProject(project);
 
       if (error) throw error;
+      if (!data) throw new Error('No data returned from addProject');
       
       const currentProjects = this.projectsSubject.value;
       this.projectsSubject.next([data, ...currentProjects]);
@@ -59,10 +71,7 @@ export class ProjectService {
 
   async updateProject(project: Project): Promise<void> {
     try {
-      const { error } = await supabase
-        .from('hub_projects')
-        .update(project)
-        .eq('id', project.id);
+      const { error } = await this.supabaseService.updateProject(project);
 
       if (error) throw error;
 
@@ -80,10 +89,7 @@ export class ProjectService {
 
   async deleteProject(id: string): Promise<void> {
     try {
-      const { error } = await supabase
-        .from('hub_projects')
-        .delete()
-        .eq('id', id);
+      const { error } = await this.supabaseService.deleteProject(id);
 
       if (error) throw error;
 

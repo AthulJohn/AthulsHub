@@ -47,6 +47,7 @@ export class ProjectsComponent implements OnInit {
   private updateCategories(): void {
     const uniqueCategories = new Set<string>();
     this.projects.forEach(project => {
+      console.log(project.techStack);
       project.techStack.forEach(tech => uniqueCategories.add(tech));
     });
     this.categories = ['All', ...Array.from(uniqueCategories)];
