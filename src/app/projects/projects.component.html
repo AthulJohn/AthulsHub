@@ -34,32 +34,42 @@
         <!-- Projects Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             <div *ngFor="let project of filteredProjects; let i = index" #cardContainer
-                class="relative transform-gpu transition-all duration-300 ease-out z-[1]"
-                (mousemove)="onCardMouseMove($event, i)" (mouseleave)="onCardMouseLeave(i)">
-                <div #projectCard class="project-card relative bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 ease-out">
-                    <div class="relative h-40 overflow-hidden">
+                class="relative transform-gpu transition-all duration-300 ease-out z-[1] cursor-pointer group"
+                (mousemove)="onCardMouseMove($event, i)" (mouseleave)="onCardMouseLeave(i)"
+                (click)="openProjectModal(project)">
+                <div #projectCard 
+                    class="project-card relative rounded-lg shadow-lg overflow-hidden 
+                           transition-all duration-300 ease-out h-[420px] 
+                           group-hover:shadow-2xl">
+                    <div class="relative h-48 overflow-hidden">
                         <img [src]="project.imageUrl" [alt]="project.name"
-                            class="w-full h-full object-cover">
+                            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
                         <div *ngIf="project.featured"
                             class="absolute top-2 right-2 bg-primary-500 text-white px-2 py-1 rounded text-sm">
                             Featured
                         </div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{{ project.name }}</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">{{ project.description }}</p>
-                        <div class="flex flex-wrap gap-1 mb-3">
+                    <div class="p-4 flex flex-col h-[calc(420px-192px)]">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white line-clamp-1">{{ project.name }}</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-3">{{ project.description }}</p>
+                        <div class="flex flex-wrap gap-1 mb-3 overflow-hidden" style="max-height: 4rem;">
                             <span *ngFor="let tech of project.techStack"
-                                class="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded text-xs">
+                                [class]="getTechStyle(tech).bg + ' ' + getTechStyle(tech).text + ' ' + getTechStyle(tech).border"
+                                class="px-2 py-0.5 rounded text-xs border transition-colors duration-200">
                                 {{ tech }}
                             </span>
                         </div>
-                        <a [href]="project.projectUrl" target="_blank"
-                            class="relative inline-block text-white text-sm font-medium group">
-                            <span class="relative z-10">View Project</span>
-                            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-400 to-purple-500 
-                            group-hover:w-full transition-all duration-300 ease-in-out"></span>
-                        </a>
+                        <div class="mt-auto">
+                            <a [href]="project.projectUrl" target="_blank" 
+                               [class.opacity-50]="!project.projectUrl" 
+                               [class.cursor-not-allowed]="!project.projectUrl"
+                               [class.pointer-events-none]="!project.projectUrl"
+                               class="relative inline-block text-white text-sm font-medium group">
+                                <span class="relative z-10">View Project</span>
+                                <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-400 to-purple-500 
+                                group-hover:w-full transition-all duration-300 ease-in-out"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,3 +99,11 @@
         </div>
     </div>
 </section>
+
+<!-- Project Modal -->
+<app-project-modal 
+    [project]="selectedProject!"
+    [isOpen]="isModalOpen"
+    (close)="closeProjectModal()"
+    *ngIf="selectedProject">
+</app-project-modal>

@@ -5,5 +5,6 @@ export interface Project {
   techStack: string[];
   featured: boolean;
   imageUrl: string;
-  projectUrl: string;
+  projectUrl?: string;
+  gitUrl?: string;
 } 
