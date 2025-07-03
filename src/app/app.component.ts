@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ATJ Hub - Portfolio';
+  mobileMenuOpen = false; // Add this property to control mobile menu state
 } 

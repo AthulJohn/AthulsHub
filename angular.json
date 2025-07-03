@@ -33,7 +33,8 @@
             "preserveSymlinks": true,
             "allowedCommonJsDependencies": [
               "css-select",
-              "critters"
+              "critters",
+              "crypto-js"
             ]
           },
           "configurations": {

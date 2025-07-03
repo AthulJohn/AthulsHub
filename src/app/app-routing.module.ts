@@ -6,8 +6,8 @@ import { ContactComponent } from './contact/contact.component';
 import { authGuard } from './admin/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'projects', component: ProjectsComponent },
+  { path: '', component:ProjectsComponent  },
+  { path: 'profile', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   {
     path: 'admin',

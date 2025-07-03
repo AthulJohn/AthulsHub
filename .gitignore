@@ -1,5 +1,3 @@
 node_modules
 .angular
-
-# Local Netlify folder
-.netlify
+dist

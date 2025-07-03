@@ -4,7 +4,7 @@
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-6xl font-bold mb-4">
                 <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                    {{ title }}
+                    Athul's Hub
                 </span>
             </h1>
             <p class="text-xl text-gray-400 max-w-3xl mx-auto">
@@ -15,18 +15,24 @@
 </section>
 
 <!-- Projects Grid Section -->
-<section class="pb-20 pt-8 bg-dark-900">
+<section class="pb-20 bg-dark-900">
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Filter Section -->
-        <div class="container mx-auto px-4 pb-8" *ngIf="showAll">
+        <div class="container mx-auto px-4 pb-8" *ngIf="showAll && !isTouchDevice">
             <div class="flex justify-center mb-8">
-                <div class="inline-flex rounded-lg border border-gray-200 dark:border-gray-700">
-                    <button *ngFor="let category of categories" [class.bg-primary-500]="selectedCategory === category"
-                        [class.text-white]="selectedCategory === category"
-                        class="px-4 py-2 text-sm font-medium first:rounded-l-lg last:rounded-r-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:z-10 focus:ring-2 focus:ring-primary-500"
-                        (click)="filterByCategory(category)">
-                        {{ category }}
-                    </button>
+                <div 
+                    class="flex flex-wrap justify-center gap-x-0 gap-y-2 rounded-lg border border-gray-200 dark:border-gray-700 w-full max-w-2xl mx-auto"
+                    style="max-height: calc(2 * 2.5rem + 0.5rem); overflow: hidden;"
+                >
+                    <ng-container *ngFor="let category of categories; let idx = index">
+                        <button *ngIf="idx < 8"
+                            [class.bg-primary-500]="selectedCategory === category"
+                            [class.text-white]="selectedCategory === category"
+                            class="px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 focus:z-10 focus:ring-2 focus:ring-primary-500 rounded-none first:rounded-l-lg last:rounded-r-lg"
+                            (click)="filterByCategory(category)">
+                            {{ category }}
+                        </button>
+                    </ng-container>
                 </div>
             </div>
         </div>
@@ -39,9 +45,9 @@
                 (click)="openProjectModal(project)">
                 <div #projectCard 
                     class="project-card relative rounded-lg shadow-lg overflow-hidden 
-                           transition-all duration-300 ease-out h-[420px] 
+                           transition-all duration-300 ease-out h-[350px] 
                            group-hover:shadow-2xl">
-                    <div class="relative h-48 overflow-hidden">
+                    <div class="relative h-44 overflow-hidden">
                         <img [src]="project.imageUrl" [alt]="project.name"
                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
                         <div *ngIf="project.featured"
@@ -51,15 +57,15 @@
                     </div>
                     <div class="p-4 flex flex-col h-[calc(420px-192px)]">
                         <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white line-clamp-1">{{ project.name }}</h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-3">{{ project.description }}</p>
-                        <div class="flex flex-wrap gap-1 mb-3 overflow-hidden" style="max-height: 4rem;">
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">{{ project.description }}</p>
+                        <div class="flex flex-wrap gap-1 overflow-hidden" style="max-height: 4rem;">
                             <span *ngFor="let tech of project.techStack"
                                 [class]="getTechStyle(tech).bg + ' ' + getTechStyle(tech).text + ' ' + getTechStyle(tech).border"
                                 class="px-2 py-0.5 rounded text-xs border transition-colors duration-200">
                                 {{ tech }}
                             </span>
                         </div>
-                        <div class="mt-auto">
+                        <div class="mt-2">
                             <a [href]="project.projectUrl" target="_blank" 
                                [class.opacity-50]="!project.projectUrl" 
                                [class.cursor-not-allowed]="!project.projectUrl"
