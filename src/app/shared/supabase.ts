@@ -12,23 +12,19 @@ export const supabase = createClient(
   environment.SUPABASE_ANON_KEY,
   {
     auth: {
-      persistSession: false, // Don't store or refresh tokens
-      autoRefreshToken: false, // Don't attempt to auto-refresh
+      persistSession: true, // Store the session in localStorage
+      autoRefreshToken: false, // Automatically refresh the token
+      detectSessionInUrl: true, // Handle OAuth redirects
+      storage: localStorage // Use localStorage for session storage
     }
   }
-//   {
-//     auth: {
-//     //   // Custom lock handler that resolves immediately
-//     //   lock: () => Promise.resolve(null),
-//     //   // Persist session in localStorage
-//       persistSession: false,
-//     //   // Detect session from URL
-//     //   detectSessionInUrl: true,
-//     //   // Storage configuration
-//     //   storage: localStorage
-//     }
-//   }
 );
+
+// Optional: Log authentication state changes
+supabase.auth.onAuthStateChange((event, session) => {
+  console.log('Supabase auth event:', event);
+  console.log('Session state:', session ? 'Authenticated' : 'Not authenticated');
+});
 
 // // Test the connection
 // (async () => {

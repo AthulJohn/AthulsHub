@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/admin/auth.service';
 import { Project } from '../../shared/models/project.model';
 import { ProjectService } from '../../shared/services/project.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { SupabaseService } from '../../shared/services/supabase.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,8 +13,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AdminDashboardComponent {
   constructor(
     private projectService: ProjectService,
-    private fb: FormBuilder,private auth: AuthService) {
-    this.projectForm = this.createProjectForm();
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private supabaseService: SupabaseService
+  ) {
+    this.projectForm = this.createProjectForm();    
+    this.loadProjects();
+    console.log("ctor");
   }
   logout() {
     this.auth.logout();
@@ -24,11 +29,8 @@ export class AdminDashboardComponent {
   projectForm: FormGroup;
   editingProject: Project | null = null;
   showForm = false;
-
-
-  ngOnInit(): void {
-    this.loadProjects();
-  }
+  uploadError: string | null = null;
+  isUploading = false;
 
   private loadProjects(): void {
     this.projectService.getProjects().subscribe(projects => {
@@ -43,8 +45,34 @@ export class AdminDashboardComponent {
       techStack: ['', Validators.required], // Will be split by comma
       featured: [false],
       imageUrl: ['', Validators.required],
-      projectUrl: ['', Validators.required]
+      projectUrl: ['', Validators.required],
+      status: [0, Validators.required],
+      gitUrl: ['', Validators.required]
     });
+  }
+
+  async onFileSelected(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.isUploading = true;
+      this.uploadError = null;
+
+      try {
+        const { url, error } = await this.supabaseService.uploadProjectImage(file);
+        if (error) {
+          this.uploadError = error;
+        } else if (url) {
+          this.projectForm.patchValue({ imageUrl: url });
+        }
+      } catch (error) {
+        this.uploadError = error instanceof Error ? error.message : 'Error uploading file';
+      } finally {
+        this.isUploading = false;
+        // Clear the input so the same file can be selected again if needed
+        input.value = '';
+      }
+    }
   }
 
   onAddNew(): void {
@@ -61,7 +89,9 @@ export class AdminDashboardComponent {
       techStack: project.techStack.join(', '),
       featured: project.featured,
       imageUrl: project.imageUrl,
-      projectUrl: project.projectUrl
+      projectUrl: project.projectUrl,
+      status: project.status,
+      gitUrl: project.gitUrl
     });
     this.showForm = true;
   }
@@ -82,7 +112,9 @@ export class AdminDashboardComponent {
         techStack: formValue.techStack.split(',').map((tech: string) => tech.trim()),
         featured: formValue.featured,
         imageUrl: formValue.imageUrl,
-        projectUrl: formValue.projectUrl
+        projectUrl: formValue.projectUrl,
+        status: formValue.status,
+        gitUrl: formValue.gitUrl
       };
 
       if (this.editingProject) {

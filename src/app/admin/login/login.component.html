@@ -4,19 +4,35 @@
   
       <div class="mb-4">
         <label class="block text-gray-600 text-sm font-medium mb-1">Username</label>
-        <input type="text" [(ngModel)]="username" placeholder="admin" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+        <input 
+          type="text" 
+          [(ngModel)]="username" 
+          placeholder="admin" 
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+          [disabled]="isLoading">
       </div>
   
       <div class="mb-6">
         <label class="block text-gray-600 text-sm font-medium mb-1">Password</label>
-        <input type="password" [(ngModel)]="password" placeholder="admin123" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+        <input 
+          type="password" 
+          [(ngModel)]="password" 
+          placeholder="••••••••" 
+          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+          [disabled]="isLoading">
       </div>
   
-      <button (click)="login()" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
-        Log In
+      <button 
+        (click)="login()" 
+        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+        [disabled]="isLoading">
+        <span *ngIf="!isLoading">Log In</span>
+        <span *ngIf="isLoading">Logging in...</span>
       </button>
   
-      <p *ngIf="loginFailed" class="text-red-500 text-sm mt-3 text-center">Invalid username or password</p>
+      <p *ngIf="loginFailed" class="text-red-500 text-sm mt-3 text-center">
+        Invalid username or password
+      </p>
     </div>
   </div>
   

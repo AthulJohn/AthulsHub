@@ -62,6 +62,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {}
 
+  getOptimizedImageUrl(imageUrl: string , width: number): string {
+      return `${imageUrl}?width=${width}&quality=50`;
+  }
+
   getTechStyle(tech: string): TechStyle {
 
     // Generate consistent color based on string
